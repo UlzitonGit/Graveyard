@@ -62,7 +62,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float _jumpPower = 5f;
 
     // Internal Variables
-    private bool isGrounded = false;
+    public bool isGrounded { get; private set; }
 
     #endregion
 
