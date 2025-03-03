@@ -36,8 +36,8 @@ public class FirstPersonController : MonoBehaviour
     // Internal Variables
     [SerializeField] private float _yaw = 0.0f;
     [SerializeField] private float _pitch = 0.0f;
-
-
+    [SerializeField] private float _dashImpulse;
+    private bool _canDash = true;
   
     #endregion
 
@@ -186,6 +186,10 @@ public class FirstPersonController : MonoBehaviour
         {
             HeadBob();
         }
+        if(Input.GetKey(KeyCode.LeftShift) && _canDash)
+        {
+            StartCoroutine(Dash());
+        }
     }
 
     void FixedUpdate()
@@ -241,7 +245,19 @@ public class FirstPersonController : MonoBehaviour
             isGrounded = false;
         }
     }
+    IEnumerator Dash()
+    {
+        _playerCanMove = false;
+        Vector3 targetVelocity = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        targetVelocity = transform.TransformDirection(targetVelocity);
+        _rb.AddForce(_dashImpulse * targetVelocity, ForceMode.Impulse);
+        _canDash = false;
+        yield return new WaitForSeconds(0.25f);   
+        _playerCanMove = true;
+        yield return new WaitForSeconds(0.5f);
+        _canDash = true;
 
+    }
     private void Jump()
     {
         // Adds force to the player rigidbody to jump
