@@ -8,9 +8,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Rendering;
+using DG.Tweening;
 
 #if UNITY_EDITOR
-    using UnityEditor;
+using UnityEditor;
     using System.Net;
 #endif
 
@@ -27,7 +29,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private bool _cameraCanMove = true;
     [SerializeField] private float _mouseSensitivity = 2f;
     [SerializeField] private float _maxLookAngle = 50f;
-
+    [SerializeField] private Volume _dashVolume;
     // Crosshair
     [SerializeField] private bool _lockCursor = true;
 
@@ -252,13 +254,18 @@ public class FirstPersonController : MonoBehaviour
         targetVelocity = transform.TransformDirection(targetVelocity);
         _rb.AddForce(_dashImpulse * targetVelocity, ForceMode.Impulse);
         _canDash = false;
-        yield return new WaitForSeconds(0.25f);   
+        DOTween.To(DGtweenUpdate, 0, 1, 0.1f).SetEase(Ease.Linear);
+        yield return new WaitForSeconds(0.25f);
+        DOTween.To(DGtweenUpdate, 1, 0, 0.1f).SetEase(Ease.Linear);
         _playerCanMove = true;
         yield return new WaitForSeconds(0.5f);
         _canDash = true;
-
     }
-    private void Jump()
+    void DGtweenUpdate(float deltaTime)
+    {
+        _dashVolume.weight = deltaTime;
+    }
+private void Jump()
     {
         // Adds force to the player rigidbody to jump
         if (isGrounded)
