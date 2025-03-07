@@ -3,11 +3,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuMananger : MonoBehaviour
 {
-    private void Update()
+    public void Play(string _scene)
     {
-        if (Input.GetKey(KeyCode.Space))
-        {
-            SceneManager.LoadScene("level1");
-        }
+        SceneManager.LoadScene( _scene );
     }
 }

@@ -10019,7 +10019,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dir: {x: 0, y: 0, z: 15}
-  _damage: 35
+  _damage: 15
 --- !u!54 &7318280099191228736
 Rigidbody:
   m_ObjectHideFlags: 0
