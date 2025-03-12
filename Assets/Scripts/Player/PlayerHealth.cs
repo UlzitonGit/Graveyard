@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerHealth : MonoBehaviour
 {
     [SerializeField] private Image _hpBar;
+    [SerializeField] private GameObject _deathPanel;
     [SerializeField] private Volume _volume;
     private float healthIncrease = 4;
     private float _health = 100;
@@ -25,7 +26,10 @@ public class PlayerHealth : MonoBehaviour
         _health -= _damage;
         if(_health <= 0)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            Time.timeScale = 0;
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            _deathPanel.SetActive(true);
         }
     }
 }

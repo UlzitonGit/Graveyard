@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e635be5b22ebc4a4f81d4f05d97e2ebc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _distance: 15
+  _distance: 20
   _weapon: {fileID: 2344062728761661252}
 --- !u!65 &3505974093157761653
 BoxCollider:
