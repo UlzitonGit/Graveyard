@@ -14,7 +14,8 @@ public class Music : MonoBehaviour
         float volume = PlayerPrefs.GetFloat("Music");
         _musicSlider.value = volume;
         _music = GetComponent<AudioSource>();
-        instance = this;
+        if(insance == null)
+            instance = new Music();
         DontDestroyOnLoad(transform.gameObject);
     }
     private void Start()
