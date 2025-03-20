@@ -15,7 +15,7 @@ public class Music : MonoBehaviour
         _musicSlider.value = volume;
         _music = GetComponent<AudioSource>();
         if(insance == null)
-            instance = new Music();
+            instance = this;
         DontDestroyOnLoad(transform.gameObject);
     }
     private void Start()
