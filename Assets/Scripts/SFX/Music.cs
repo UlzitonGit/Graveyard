@@ -16,6 +16,7 @@ public class Music : MonoBehaviour
         _music = GetComponent<AudioSource>();
         if(insance == null)
             instance = this;
+        else Destroy(gameObject);
         DontDestroyOnLoad(transform.gameObject);
     }
     private void Start()
